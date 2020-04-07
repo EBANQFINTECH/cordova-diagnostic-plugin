@@ -10,7 +10,6 @@
 #import <Cordova/CDVPlugin.h>
 #import <WebKit/WebKit.h>
 
-#import <CoreBluetooth/CoreBluetooth.h>
 #import <CoreLocation/CoreLocation.h>
 #import <CoreMotion/CoreMotion.h>
 #import <EventKit/EventKit.h>
@@ -48,9 +47,8 @@ static NSString*const REMOTE_NOTIFICATIONS_ALERT = @"alert";
 static NSString*const REMOTE_NOTIFICATIONS_SOUND = @"sound";
 static NSString*const REMOTE_NOTIFICATIONS_BADGE = @"badge";
 
-@interface Diagnostic : CDVPlugin <CBCentralManagerDelegate, CLLocationManagerDelegate>
+@interface Diagnostic : CDVPlugin <CLLocationManagerDelegate>
 
-    @property (nonatomic, retain) CBCentralManager* bluetoothManager;
     @property (strong, nonatomic) CLLocationManager* locationManager;
     @property (strong, nonatomic) CMMotionActivityManager* motionManager;
     @property (strong, nonatomic) NSOperationQueue* motionActivityQueue;
@@ -76,10 +74,6 @@ static NSString*const REMOTE_NOTIFICATIONS_BADGE = @"badge";
 
 - (void) isWifiAvailable: (CDVInvokedUrlCommand*)command;
 - (void) isWifiEnabled: (CDVInvokedUrlCommand*)command;
-
-- (void) isBluetoothAvailable: (CDVInvokedUrlCommand*)command;
-- (void) getBluetoothState: (CDVInvokedUrlCommand*)command;
-- (void) requestBluetoothAuthorization: (CDVInvokedUrlCommand*)command;
 
 - (void) isRemoteNotificationsEnabled: (CDVInvokedUrlCommand*)command;
 - (void) getRemoteNotificationTypes: (CDVInvokedUrlCommand*)command;
